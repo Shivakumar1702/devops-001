@@ -8,7 +8,9 @@ pipeline {
     environment {
         DOCKERHUB = credentials('dockerhub')
     }
-
+    triggers {
+        pollscm('* * * * *')
+    }
 
     stages {
 
@@ -37,6 +39,7 @@ pipeline {
                    // }
                    bat "docker login -u ${DOCKERHUB_USR} -p ${DOCKERHUB_PSW}"
                    bat "docker push $imageName"
+                   bat "docker logout"
                }
            }
         }
