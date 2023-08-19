@@ -23,7 +23,8 @@ pipeline {
                script {
                    def imageName = "shivakumar1702/httpd:${env.BUILD_NUMBER}"
                    bat "docker image build -t ${imageName} ."
-                   echo DOCKERHUB
+                   echo DOCKERHUB_USR
+                   echo DOCKERHUB_PSW
                }
            }
        }
