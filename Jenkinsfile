@@ -12,7 +12,8 @@ pipeline {
     
     parameters {
         choice (
-            choices: '''BUILDNPUSH\nPLAN\nAPPLY\nDESTROY\nDEPLOY'''
+            choices: '''BUILDNPUSH\nPLAN\nAPPLY\nDESTROY\nDEPLOY''',
+            description: 'select an option',
             name: 'CHOICE'
         )
     }
