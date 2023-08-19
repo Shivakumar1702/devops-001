@@ -41,6 +41,14 @@ pipeline {
                }
            }
         }
+
+        stage('Remove local image') {
+            steps {
+                script {
+                    bat "docker image rm shivakumar1702/httpd:${env.BUILD_NUMBER}"
+                }
+            }
+        }
     }
 
     post {
