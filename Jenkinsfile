@@ -28,9 +28,9 @@ pipeline {
             steps {
                 script {
                     def imageName = "shivakumar1702/httpd:${env.BUILD_NUMBER}"
-                    docker.withRegistry(credentialsId: 'dockerhub', url: 'https://hub.docker.com/') {
-                        bat "docker push $imageName"
-                    }
+                    // docker.withRegistry(credentialsId: 'dockerhub', url: 'https://hub.docker.com/') {
+                    // }
+                    bat "docker push $imageName"
                 }
             }
         }
