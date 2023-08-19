@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     def imageName = "shivakumar1702/httpd:${env.BUILD_NUMBER}"
-                    docker.build(imageName, './')
+                    bat "docker image build -t ${imageName} ."
                 }
             }
         }
@@ -28,8 +28,8 @@ pipeline {
             steps {
                 script {
                     def imageName = "your-docker-hub-username/your-image-name:${env.BUILD_NUMBER}"
-                    docker.withRegistry('https://hub.docker.com', 'dockerhub') {
-                        docker.image(imageName).push()
+                    withDockerRegistry(credentialsId: 'dockerhub', url: 'https://hub.docker.com/') {
+                        bat "docker push $imageName"
                     }
                 }
             }
