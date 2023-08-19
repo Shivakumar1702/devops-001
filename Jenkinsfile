@@ -8,9 +8,9 @@ pipeline {
     environment {
         DOCKERHUB = credentials('dockerhub')
     }
-    triggers {
-        pollSCM('* * * * *')
-    }
+    // triggers {
+    //     pollSCM('* * * * *')
+    // }
 
     stages {
 
