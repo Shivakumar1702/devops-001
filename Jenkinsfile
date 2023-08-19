@@ -15,26 +15,39 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    def imageName = "shivakumar1702/httpd:${env.BUILD_NUMBER}"
-                    bat "docker image build -t ${imageName} ."
-                }
-            }
-        }
+    //     stage('Build Docker Image') {
+    //         steps {
+    //             script {
+    //                 def imageName = "shivakumar1702/httpd:${env.BUILD_NUMBER}"
+    //                 bat "docker image build -t ${imageName} ."
+    //             }
+    //         }
+    //     }
 
-        stage('Push to Docker Hub') {
+    //     stage('Push to Docker Hub') {
+    //         steps {
+    //             script {
+    //                 def imageName = "your-docker-hub-username/your-image-name:${env.BUILD_NUMBER}"
+    //                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://hub.docker.com/') {
+    //                     bat "docker push $imageName"
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+        stage ('Docker build and Push') {
             steps {
-                script {
-                    def imageName = "your-docker-hub-username/your-image-name:${env.BUILD_NUMBER}"
-                    withDockerRegistry(credentialsId: 'dockerhub', url: 'https://hub.docker.com/') {
-                        bat "docker push $imageName"
+                dockerBuildAndPublish {
+                    repositoryName("shivakumar1702/httpd")
+                    tag("${env.BUILD_NUMBER}")
+                    registryCredentials('dockerhub')
+                    forcePull(false)
+                    createFingerprints(false)
+                    skipDecorate()
                     }
                 }
             }
         }
-    }
 
     post {
         success {
