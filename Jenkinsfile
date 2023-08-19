@@ -30,6 +30,7 @@ pipeline {
                     def imageName = "shivakumar1702/httpd:${env.BUILD_NUMBER}"
                     // docker.withRegistry(credentialsId: 'dockerhub', url: 'https://hub.docker.com/') {
                     // }
+                    bat "docker login -u shivakumar1702 -p Docker@1996"
                     bat "docker push $imageName"
                 }
             }
