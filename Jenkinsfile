@@ -9,7 +9,7 @@ pipeline {
         DOCKERHUB = credentials('dockerhub')
     }
     triggers {
-        pollscm('* * * * *')
+        pollSCM('* * * * *')
     }
 
     stages {
