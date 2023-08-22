@@ -121,6 +121,11 @@ pipeline {
         }
 
         stage('User Input') {
+            when {
+                expression {
+                    CHOICE == 'DEPLOY'
+                }
+            }
             steps {
                 script {
                     def userInput = input(
