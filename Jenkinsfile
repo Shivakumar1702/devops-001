@@ -83,7 +83,7 @@ pipeline {
                 }
             }
             steps {
-                bat 'terraform init --chdir=./Docker-VM'
+                bat 'terraform -chdir=./Docker-VM init'
             }
         }
 
@@ -94,7 +94,7 @@ pipeline {
                 }
             }
             steps {
-                bat 'terraform plan --chdir=./Docker-VM'
+                bat 'terraform -chdir=./Docker-VM plan'
             }
         }
 
@@ -105,7 +105,7 @@ pipeline {
                 }
             }
             steps {
-                bat 'terraform apply --chdir=./Docker-VM -auto-approve'
+                bat 'terraform -chdir=./Docker-VM -auto-approve apply'
             }
         }
         
@@ -116,7 +116,7 @@ pipeline {
                 }
             }
             steps {
-                bat 'terraform destroy --chdir=./Docker-VM -auto-approve'
+                bat 'terraform -chdir=./Docker-VM -auto-approve destroy'
             }
         }
     }
