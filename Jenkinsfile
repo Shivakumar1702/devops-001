@@ -75,6 +75,50 @@ pipeline {
                 }
             }
         }
+
+        stage('Terraform init') {
+            when {
+                expression {
+                    CHOICE == 'PLAN' || CHOICE == 'APPLY' || CHOICE == 'DESTROY'
+                }
+            }
+            steps {
+                bat 'terraform init --chdir=./Docker-VM'
+            }
+        }
+
+        stage('Terraform Plan') {
+            when {
+                expression {
+                    CHOICE == 'PLAN'
+                }
+            }
+            steps {
+                bat 'terraform plan --chdir=./Docker-VM'
+            }
+        }
+
+        stage('Terraform Apply') {
+            when {
+                expression {
+                    CHOICE == 'APPLY'
+                }
+            }
+            steps {
+                bat 'terraform apply --chdir=./Docker-VM -auto-approve'
+            }
+        }
+        
+        stage('Terraform Destroy') {
+            when {
+                expression {
+                    CHOICE == 'DESTROY'
+                }
+            }
+            steps {
+                bat 'terraform destroy --chdir=./Docker-VM -auto-approve'
+            }
+        }
     }
 
     post {
