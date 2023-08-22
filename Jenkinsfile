@@ -143,10 +143,12 @@ pipeline {
                             string(defaultValue: '', description: 'Your input', name: 'IMAGE_TAG')
                         ]
                     )
-                    echo "Server IP: ${serverIP}"
-                    echo "Image Tag: ${imageTag}"
-                    bat "docker -H ssh://adminuser@${serverIP} run -d --name customhttpd -p 8080:80 shivakumar1702/httpd:${imageTag}"
+                    
                 }
+
+                echo "Server IP: ${serverIP}"
+                echo "Image Tag: ${imageTag}"
+                bat "docker -H ssh://adminuser@${serverIP} run -d --name customhttpd -p 8080:80 shivakumar1702/httpd:${imageTag}"
             }
         }
     }
