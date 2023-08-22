@@ -119,6 +119,21 @@ pipeline {
                 bat 'terraform -chdir=./Docker-VM destroy -auto-approve'
             }
         }
+
+        stage('User Input') {
+            steps {
+                script {
+                    def userInput = input(
+                        id: 'userInput',
+                        message: 'Please provide some input:',
+                        parameters: [
+                            string(defaultValue: '', description: 'Your input', name: 'USER_INPUT')
+                        ]
+                    )
+                    echo "User input: ${userInput}"
+                }
+            }
+        }
     }
 
     post {
