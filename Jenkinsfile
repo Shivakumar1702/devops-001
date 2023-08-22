@@ -129,26 +129,26 @@ pipeline {
             }
             steps {
                 script {
-                    def serverIP = input(
-                        id: 'userInput',
-                        message: 'Please provide the Server IP:',
-                        parameters: [
-                            string(defaultValue: '', description: 'Your input', name: 'SERVER_IP')
-                        ]
-                    )
-                    def imageTag = input(
-                        id: 'imageTag',
-                        message: 'Please provide the image name:',
-                        parameters: [
-                            string(defaultValue: '', description: 'Your input', name: 'IMAGE_TAG')
-                        ]
-                    )
+                //     def serverIP = input(
+                //         id: 'userInput',
+                //         message: 'Please provide the Server IP:',
+                //         parameters: [
+                //             string(defaultValue: '', description: 'Your input', name: 'SERVER_IP')
+                //         ]
+                //     )
+                //     def imageTag = input(
+                //         id: 'imageTag',
+                //         message: 'Please provide the image name:',
+                //         parameters: [
+                //             string(defaultValue: '', description: 'Your input', name: 'IMAGE_TAG')
+                //         ]
+                //     )
                     
+                // echo "Server IP: ${serverIP}"
+                // echo "Image Tag: ${imageTag}"
+                // bat "docker -H ssh://adminuser@${serverIP} run -d --name customhttpd -p 8080:80 shivakumar1702/httpd:${imageTag}"
+                bat "docker -H ssh://adminuser@4.157.253.27 run -d --name customhttpd -p 8080:80 shivakumar1702/httpd:20"
                 }
-
-                echo "Server IP: ${serverIP}"
-                echo "Image Tag: ${imageTag}"
-                bat "docker -H ssh://adminuser@${serverIP} run -d --name customhttpd -p 8080:80 shivakumar1702/httpd:${imageTag}"
             }
         }
     }
