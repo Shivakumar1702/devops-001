@@ -90,7 +90,7 @@ pipeline {
         stage('Terraform Plan') {
             when {
                 expression {
-                    CHOICE == 'PLAN'
+                    CHOICE == 'PLAN' || CHOICE == 'APPLY' || CHOICE == 'DESTROY'
                 }
             }
             steps {
