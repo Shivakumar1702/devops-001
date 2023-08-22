@@ -128,14 +128,22 @@ pipeline {
             }
             steps {
                 script {
-                    def userInput = input(
+                    def serverIP = input(
                         id: 'userInput',
-                        message: 'Please provide some input:',
+                        message: 'Please provide the Server IP:',
                         parameters: [
-                            string(defaultValue: '', description: 'Your input', name: 'USER_INPUT')
+                            string(defaultValue: '', description: 'Your input', name: 'SERVER_IP')
                         ]
                     )
-                    echo "User input: ${userInput}"
+                    def imageTag = input(
+                        id: 'imageTag',
+                        message: 'Please provide the image name:',
+                        parameters: [
+                            string(defaultValue: '', description: 'Your input', name: 'IMAGE_TAG')
+                        ]
+                    )
+                    echo "Server IP: ${serverIP}"
+                    echo "Server IP: ${imageTag}"
                 }
             }
         }
