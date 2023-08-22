@@ -8,6 +8,7 @@ pipeline {
     }
     environment {
         DOCKERHUB = credentials('dockerhub')
+        SERVERCRED = credentials('SERVERCRED')
     }
     
     parameters {
@@ -79,7 +80,7 @@ pipeline {
         stage('Terraform init') {
             when {
                 expression {
-                    CHOICE == 'PLAN' || CHOICE == 'APPLY' || CHOICE == 'DESTROY'
+                    CHOICE == 'PLAN' || CHOICE == 'APPLY' || CHOICE == 'DESTROY' || CHOICE == 'DEPLOY'
                 }
             }
             steps {
@@ -90,7 +91,7 @@ pipeline {
         stage('Terraform Plan') {
             when {
                 expression {
-                    CHOICE == 'PLAN' || CHOICE == 'APPLY' || CHOICE == 'DESTROY'
+                    CHOICE == 'PLAN' || CHOICE == 'APPLY' || CHOICE == 'DESTROY' || CHOICE == 'DEPLOY'
                 }
             }
             steps {
@@ -101,7 +102,7 @@ pipeline {
         stage('Terraform Apply') {
             when {
                 expression {
-                    CHOICE == 'APPLY'
+                    CHOICE == 'APPLY' || CHOICE == 'DEPLOY'
                 }
             }
             steps {
@@ -120,7 +121,7 @@ pipeline {
             }
         }
 
-        stage('User Input') {
+        stage('DEPLOY') {
             when {
                 expression {
                     CHOICE == 'DEPLOY'
@@ -143,7 +144,8 @@ pipeline {
                         ]
                     )
                     echo "Server IP: ${serverIP}"
-                    echo "Server IP: ${imageTag}"
+                    echo "Image Tag: ${imageTag}"
+                    bat "sudo docker -H ssh://adminuser@${serverIP}:${SERVERCRED_PSW} run -d -p --name customhttpd 8000:80 shivakumar1702/httpd:${imageTag}"
                 }
             }
         }
