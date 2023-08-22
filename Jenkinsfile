@@ -105,7 +105,7 @@ pipeline {
                 }
             }
             steps {
-                bat 'terraform -chdir=./Docker-VM -auto-approve apply'
+                bat 'terraform -chdir=./Docker-VM apply -auto-approve'
             }
         }
         
@@ -116,7 +116,7 @@ pipeline {
                 }
             }
             steps {
-                bat 'terraform -chdir=./Docker-VM -auto-approve destroy'
+                bat 'terraform -chdir=./Docker-VM destroy -auto-approve'
             }
         }
     }
