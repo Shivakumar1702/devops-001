@@ -145,7 +145,7 @@ pipeline {
                     )
                     echo "Server IP: ${serverIP}"
                     echo "Image Tag: ${imageTag}"
-                    bat "docker -H ssh://adminuser@${serverIP} run -d -p --name customhttpd 8000:80 shivakumar1702/httpd:${imageTag}"
+                    bat "docker -H ssh://adminuser@${serverIP} run -d --name customhttpd -p 8000:80 shivakumar1702/httpd:${imageTag}"
                 }
             }
         }
